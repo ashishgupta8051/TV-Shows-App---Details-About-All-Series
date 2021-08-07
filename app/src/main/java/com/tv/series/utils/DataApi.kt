@@ -1,5 +1,6 @@
 package com.tv.series.utils
 
+import com.tv.series.response.TVShowDetailsResponse
 import com.tv.series.response.TVShowResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -10,7 +11,12 @@ interface DataApi {
     @GET("most-popular")
     fun getTvShows(
         @Query("page") page:Int,
-    ): Call<List<TVShowResponse>>
+    ): Call<TVShowResponse>
+
+    @GET("show-details")
+    fun getTvShowsDetails(
+        @Query("q") showName:String,
+    ): Call<TVShowDetailsResponse>
 
 
 }

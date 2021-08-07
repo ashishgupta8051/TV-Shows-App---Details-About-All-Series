@@ -6,26 +6,23 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tv.series.network.ApiClient
 import com.tv.series.response.TVShowResponse
+import com.tv.series.utils.DataApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class TVShowRepository() {
-    fun getPopularTvShows(page:Int,context: Context): LiveData<List<TVShowResponse>>{
-        val tvShowList:MutableLiveData<List<TVShowResponse>> = MutableLiveData()
-        val call: Call<List<TVShowResponse>> = ApiClient.getApi.getTvShows(page)
+class TVShowRepository {
+    val tvShowList:MutableLiveData<TVShowResponse> = MutableLiveData()
 
-        call.enqueue(object: Callback<List<TVShowResponse>>{
-            override fun onResponse(call: Call<List<TVShowResponse>>, response: Response<List<TVShowResponse>>) {
-                if (response.isSuccessful){
-                    tvShowList.postValue(response.body())
-                }else{
-                    Toast.makeText(context,response.errorBody().toString(),Toast.LENGTH_SHORT).show()
-                }
+    fun getPopularTvShows(page:Int): MutableLiveData<TVShowResponse>{
+        val call: Call<TVShowResponse> = ApiClient.getApi.getTvShows(page)
+        call.enqueue(object: Callback<TVShowResponse>{
+            override fun onResponse(call: Call<TVShowResponse>, response: Response<TVShowResponse>) {
+                tvShowList.postValue(response.body())
             }
 
-            override fun onFailure(call: Call<List<TVShowResponse>>, t: Throwable) {
+            override fun onFailure(call: Call<TVShowResponse>, t: Throwable) {
                 tvShowList.postValue(null)
             }
         })
