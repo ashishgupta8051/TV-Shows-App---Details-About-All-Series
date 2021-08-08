@@ -20,7 +20,7 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/allTvShowLoader"
         android:layout_width="@dimen/_28sdp"
         android:layout_height="@dimen/_28sdp"
         android:indeterminateTint="@color/colorOnPrimary"

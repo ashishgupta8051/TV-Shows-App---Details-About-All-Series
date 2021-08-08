@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import com.tv.series.model.TVShow
 
 data class TVShowResponse(@SerializedName("page")
-                          val pages:Int,
+                          val page:Int,
                           @SerializedName("pages")
                           val totalPage:Int,
                           @SerializedName("tv_shows")

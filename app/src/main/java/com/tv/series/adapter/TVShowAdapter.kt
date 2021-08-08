@@ -38,7 +38,7 @@ class TVShowAdapter(private val tvShowList: List<TVShow>,private val listener:Cl
     }
 
     inner class TVShowViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        var imageView:ImageView = itemView.findViewById(R.id.imageTvShow)
+        var imageView:ImageView = itemView.findViewById(R.id.showImage)
         var textName:TextView = itemView.findViewById(R.id.textName)
         var textNetwork:TextView = itemView.findViewById(R.id.textNetwork)
         var textStarted:TextView = itemView.findViewById(R.id.textStarted)

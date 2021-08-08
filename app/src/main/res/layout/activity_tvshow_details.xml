@@ -1,9 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.TVShowDetailsActivity">
+
+    <ProgressBar
+        android:id="@+id/tvShowDetailsLoader"
+        android:layout_width="@dimen/_28sdp"
+        android:layout_height="@dimen/_28sdp"
+        android:indeterminateTint="@color/colorOnPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_160sdp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <View
+        android:id="@+id/viewFadingEdge"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@drawable/view_background"
+        app:layout_constraintBottom_toBottomOf="@+id/viewPager"/>
+
+    <LinearLayout
+        android:id="@+id/indicatorLayoutManager"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="end|center_horizontal"
+        android:orientation="horizontal"
+        android:padding="@dimen/_8sdp"
+        app:layout_constraintStart_toEndOf="@+id/tvShowImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/viewFadingEdge"/>
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/tvShowImage"
+        app:riv_corner_radius="@dimen/_6sdp"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:scaleType="centerCrop"
+        tools:src="@mipmap/app_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewPager"
+        app:layout_constraintBottom_toBottomOf="@+id/viewPager"
+        />
+
+    <TextView
+        android:id="@+id/tvShowName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        tools:text="Name"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="@dimen/_13sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvShowImage"
+        app:layout_constraintTop_toBottomOf="@+id/viewPager" />
+
+    <TextView
+        android:id="@+id/tvShowNetwork"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntu_regular"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        tools:text="Network"
+        android:textColor="@color/colorTextOther"
+        android:textSize="@dimen/_11sdp"
+        app:layout_constraintEnd_toEndOf="@+id/tvShowName"
+        app:layout_constraintStart_toStartOf="@+id/tvShowName"
+        app:layout_constraintTop_toBottomOf="@+id/tvShowName" />
+
+    <TextView
+        android:id="@+id/tvShowStarted"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntu_regular"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        tools:text="Started on : 12-2-15"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="@dimen/_11sdp"
+        app:layout_constraintEnd_toEndOf="@id/tvShowNetwork"
+        app:layout_constraintStart_toStartOf="@id/tvShowNetwork"
+        app:layout_constraintTop_toBottomOf="@+id/tvShowNetwork" />
+
+    <TextView
+        android:id="@+id/tvShowStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntu_regular"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        tools:text="Status : Running"
+        android:textColor="@android:color/holo_green_light"
+        android:textSize="@dimen/_11sdp"
+        app:layout_constraintEnd_toEndOf="@id/tvShowStarted"
+        app:layout_constraintStart_toStartOf="@id/tvShowStarted"
+        app:layout_constraintTop_toBottomOf="@+id/tvShowStarted" />
+
+
+
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 
 import androidx.lifecycle.ViewModelProvider
@@ -33,15 +34,20 @@ class AllTVShowsActivity : AppCompatActivity(),ClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_tv_shows)
 
+        //action bar title name
         supportActionBar!!.title = "TV Shows | Most Popular"
 
+        //initialize TVShowViewModel
         tvShowViewModel = ViewModelProvider(this).get(TVShowViewModel::class.java)
 
-        progressBar = findViewById(R.id.progressBar)
+        //Binding data
+        progressBar = findViewById(R.id.allTvShowLoader)
         recyclerView = findViewById(R.id.tvShowRecyclerView)
 
+        //set Recycler View
         linearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayoutManager
+        recyclerView.setHasFixedSize(true)
         tvShowAdapter = TVShowAdapter(tvShowList,this)
         recyclerView.adapter = tvShowAdapter
 
@@ -57,18 +63,12 @@ class AllTVShowsActivity : AppCompatActivity(),ClickListener {
             }
         })
 
+        //get list of all tv series
         loadPopularTvShow()
     }
 
-    private fun loadPopularTvShow() {
-        tvShowViewModel.getTvShow(currentPage).observe(this,{
-                response ->
-            progressBar.visibility = View.GONE
-            totalPages = response.totalPage
-            val oldCount = tvShowList.size
-            tvShowList.addAll(response.tvShows)
-            tvShowAdapter.notifyItemRangeInserted(oldCount,tvShowList.size)
-        })
+    override fun onBackPressed() {
+        finishAffinity()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -91,9 +91,17 @@ class AllTVShowsActivity : AppCompatActivity(),ClickListener {
         startActivity(intent)
     }
 
-    override fun onBackPressed() {
-        finishAffinity()
+    private fun loadPopularTvShow() {
+        tvShowViewModel.getTvShow(currentPage).observe(this,{
+                response ->
+            progressBar.visibility = View.GONE
+            totalPages = response.totalPage
+            val oldCount = tvShowList.size
+            tvShowList.addAll(response.tvShows)
+            tvShowAdapter.notifyItemRangeInserted(oldCount,tvShowList.size)
+        })
     }
+
 
 
 }
