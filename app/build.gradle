@@ -10,15 +10,15 @@ android {
         applicationId "com.tv.series"
         minSdk 21
         targetSdk 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -33,7 +33,6 @@ android {
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.4.0'
@@ -42,8 +41,17 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    //Material Design
-    implementation 'com.google.android.material:material:1.4.0'
+    // Lifecycle components
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.3.1'
+
+    // Room components
+    implementation 'androidx.room:room-runtime:2.3.0'
+    implementation 'androidx.room:room-rxjava2:2.3.0'
+    implementation 'androidx.room:room-ktx:2.3.0'
+    annotationProcessor 'androidx.room:room-compiler:2.3.0'
+    androidTestImplementation 'androidx.room:room-testing:2.3.0'
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
@@ -54,17 +62,6 @@ dependencies {
 
     //Round ImageView
     implementation 'com.makeramen:roundedimageview:2.3.0'
-
-    //Lifecycle Extension
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-
-    //Room and RxJava Support
-    implementation 'androidx.room:room-runtime:2.3.0'
-    annotationProcessor 'androidx.room:room-compiler:2.3.0'
-    implementation 'androidx.room:room-rxjava2:2.3.0'
-
-    //Rxjava
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
     //Scalable size unit
     implementation 'com.intuit.sdp:sdp-android:1.0.6'

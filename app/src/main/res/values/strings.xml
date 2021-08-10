@@ -2,5 +2,8 @@
     <string name="app_name">TV Shows App - Details About All Series</string>
 
     <string name="tv_shows_most_popular">TV Shows | Most Popular</string>
-    <string name="search_movie">Search movie...</string>
+    <string name="search_movie">Search movie…</string>
+    <string name="show_more">Read More</string>
+    <string name="episode">Episode</string>
+    <string name="download">Download</string>
 </resources>

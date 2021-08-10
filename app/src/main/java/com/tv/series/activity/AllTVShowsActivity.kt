@@ -7,7 +7,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
 
 import androidx.lifecycle.ViewModelProvider
@@ -78,7 +77,7 @@ class AllTVShowsActivity : AppCompatActivity(),ClickListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_search){
-
+            
         }else if (item.itemId == R.id.action_eye){
             Toast.makeText(this,"Eye",Toast.LENGTH_SHORT).show()
         }
@@ -95,9 +94,9 @@ class AllTVShowsActivity : AppCompatActivity(),ClickListener {
         tvShowViewModel.getTvShow(currentPage).observe(this,{
                 response ->
             progressBar.visibility = View.GONE
-            totalPages = response.totalPage
+            totalPages = response.pages
             val oldCount = tvShowList.size
-            tvShowList.addAll(response.tvShows)
+            tvShowList.addAll(response.tv_shows)
             tvShowAdapter.notifyItemRangeInserted(oldCount,tvShowList.size)
         })
     }

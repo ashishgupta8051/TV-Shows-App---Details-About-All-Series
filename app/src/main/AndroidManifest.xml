@@ -14,7 +14,10 @@
         android:theme="@style/Theme.MovieDetailsApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".activity.TVShowDetailsActivity"/>
+        <activity
+            android:name=".activity.EpisodeDetails"
+            android:exported="true" />
+        <activity android:name=".activity.TVShowDetailsActivity" />
         <activity
             android:name=".activity.AllTVShowsActivity"
             android:exported="true">

@@ -1,6 +1,8 @@
 package com.tv.series.repository
 
+import android.content.ContentValues.TAG
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -23,7 +25,7 @@ class TVShowRepository {
             }
 
             override fun onFailure(call: Call<TVShowResponse>, t: Throwable) {
-                tvShowList.postValue(null)
+                Log.e(TAG,t.message.toString())
             }
         })
         return tvShowList

@@ -17,112 +17,275 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_160sdp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_height="match_parent">
 
-    <View
-        android:id="@+id/viewFadingEdge"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
-        android:background="@drawable/view_background"
-        app:layout_constraintBottom_toBottomOf="@+id/viewPager"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/indicatorLayoutManager"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="end|center_horizontal"
-        android:orientation="horizontal"
-        android:padding="@dimen/_8sdp"
-        app:layout_constraintStart_toEndOf="@+id/tvShowImage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/viewFadingEdge"/>
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_160sdp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/tvShowImage"
-        app:riv_corner_radius="@dimen/_6sdp"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="@dimen/_150sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:scaleType="centerCrop"
-        tools:src="@mipmap/app_icon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewPager"
-        app:layout_constraintBottom_toBottomOf="@+id/viewPager"
-        />
+            <View
+                android:id="@+id/viewFadingEdge"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@drawable/view_background"
+                app:layout_constraintBottom_toBottomOf="@+id/viewPager"/>
 
-    <TextView
-        android:id="@+id/tvShowName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginEnd="@dimen/_8sdp"
-        android:fontFamily="@font/ubuntu_bold"
-        android:includeFontPadding="false"
-        android:maxLines="1"
-        tools:text="Name"
-        android:textColor="@color/colorTextPrimary"
-        android:textSize="@dimen/_13sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvShowImage"
-        app:layout_constraintTop_toBottomOf="@+id/viewPager" />
+            <LinearLayout
+                android:id="@+id/indicatorLayoutManager"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end|center_horizontal"
+                android:orientation="horizontal"
+                android:padding="@dimen/_8sdp"
+                app:layout_constraintStart_toEndOf="@+id/tvShowImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/viewFadingEdge"/>
 
-    <TextView
-        android:id="@+id/tvShowNetwork"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/ubuntu_regular"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:includeFontPadding="false"
-        android:maxLines="1"
-        tools:text="Network"
-        android:textColor="@color/colorTextOther"
-        android:textSize="@dimen/_11sdp"
-        app:layout_constraintEnd_toEndOf="@+id/tvShowName"
-        app:layout_constraintStart_toStartOf="@+id/tvShowName"
-        app:layout_constraintTop_toBottomOf="@+id/tvShowName" />
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/tvShowImage"
+                app:riv_corner_radius="@dimen/_6sdp"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_155sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:scaleType="centerCrop"
+                tools:src="@mipmap/app_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewPager"
+                app:layout_constraintBottom_toBottomOf="@+id/viewPager"
+                />
 
-    <TextView
-        android:id="@+id/tvShowStarted"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/ubuntu_regular"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:includeFontPadding="false"
-        android:maxLines="1"
-        tools:text="Started on : 12-2-15"
-        android:textColor="@color/colorTextSecondary"
-        android:textSize="@dimen/_11sdp"
-        app:layout_constraintEnd_toEndOf="@id/tvShowNetwork"
-        app:layout_constraintStart_toStartOf="@id/tvShowNetwork"
-        app:layout_constraintTop_toBottomOf="@+id/tvShowNetwork" />
+            <TextView
+                android:id="@+id/tvShowName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:fontFamily="@font/ubuntu_bold"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                tools:text="Name"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="@dimen/_13sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvShowImage"
+                app:layout_constraintTop_toBottomOf="@+id/viewPager" />
 
-    <TextView
-        android:id="@+id/tvShowStatus"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/ubuntu_regular"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:includeFontPadding="false"
-        android:maxLines="1"
-        tools:text="Status : Running"
-        android:textColor="@android:color/holo_green_light"
-        android:textSize="@dimen/_11sdp"
-        app:layout_constraintEnd_toEndOf="@id/tvShowStarted"
-        app:layout_constraintStart_toStartOf="@id/tvShowStarted"
-        app:layout_constraintTop_toBottomOf="@+id/tvShowStarted" />
+            <TextView
+                android:id="@+id/tvShowNetwork"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ubuntu_regular"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                tools:text="Network"
+                android:textColor="@color/colorTextOther"
+                android:textSize="@dimen/_11sdp"
+                app:layout_constraintEnd_toEndOf="@+id/tvShowName"
+                app:layout_constraintStart_toStartOf="@+id/tvShowName"
+                app:layout_constraintTop_toBottomOf="@+id/tvShowName" />
+
+            <TextView
+                android:id="@+id/tvShowStarted"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ubuntu_regular"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                tools:text="Started on : 12-2-15"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="@dimen/_11sdp"
+                app:layout_constraintEnd_toEndOf="@id/tvShowNetwork"
+                app:layout_constraintStart_toStartOf="@id/tvShowNetwork"
+                app:layout_constraintTop_toBottomOf="@+id/tvShowNetwork" />
+
+            <TextView
+                android:id="@+id/tvShowStatus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ubuntu_regular"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                tools:text="Status : Running"
+                android:textColor="@android:color/holo_green_light"
+                android:textSize="@dimen/_11sdp"
+                app:layout_constraintEnd_toEndOf="@id/tvShowStarted"
+                app:layout_constraintStart_toStartOf="@id/tvShowStarted"
+                app:layout_constraintTop_toBottomOf="@+id/tvShowStarted" />
+
+            <TextView
+                android:id="@+id/tvShowGenres"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ubuntu_regular"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                tools:text="Romantic, Horror, Drama"
+                android:textColor="@color/silver"
+                android:textSize="@dimen/_11sdp"
+                app:layout_constraintEnd_toEndOf="@id/tvShowStarted"
+                app:layout_constraintStart_toStartOf="@id/tvShowStarted"
+                app:layout_constraintTop_toBottomOf="@+id/tvShowStatus" />
+
+            <TextView
+                android:id="@+id/tvShowDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ubuntu_regular"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:includeFontPadding="false"
+                android:maxLines="6"
+                tools:text="Description"
+                android:ellipsize="end"
+                android:lineSpacingExtra="@dimen/_2sdp"
+                android:textColor="@color/colorTextIcons"
+                android:textSize="@dimen/_11sdp"
+                app:layout_constraintTop_toBottomOf="@+id/tvShowImage"/>
+
+            <TextView
+                android:id="@+id/tvShowDescriptionMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ubuntu_regular"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:includeFontPadding="false"
+                android:text="@string/show_more"
+                android:textColor="@color/colorOnPrimary"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="@+id/tvShowDescription"
+                app:layout_constraintTop_toBottomOf="@+id/tvShowDescription"/>
+
+            <View
+                android:id="@+id/viewDivider1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorOnPrimary"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginRight="@dimen/_8sdp"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:visibility="invisible"
+                app:layout_constraintTop_toBottomOf="@+id/tvShowDescriptionMore"/>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_8sdp"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:visibility="invisible"
+                app:layout_constraintTop_toBottomOf="@+id/viewDivider1">
 
 
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:src="@drawable/ic_round_star_24"/>
+
+                <TextView
+                    android:id="@+id/tvShowRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:includeFontPadding="false"
+                    tools:text="rating"
+                    android:textColor="@color/colorTextIcons"
+                    android:layout_marginStart="@dimen/_5sdp"/>
+
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginLeft="@dimen/_25sdp"
+                    android:src="@drawable/ic_baseline_runtime_24"/>
+
+                <TextView
+                    android:id="@+id/tvShowRuntime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:includeFontPadding="false"
+                    tools:text="runtime"
+                    android:textColor="@color/colorTextIcons"
+                    android:layout_marginStart="@dimen/_5sdp"/>
 
 
+            </LinearLayout>
 
+            <View
+                android:id="@+id/viewDivider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorOnPrimary"
+                android:visibility="invisible"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginRight="@dimen/_8sdp"
+                android:layout_marginLeft="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5"/>
 
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:fontFamily="@font/ubuntu_medium"
+                android:includeFontPadding="false"
+                android:text="@string/download"
+                android:textColor="@color/white"
+                android:visibility="invisible"
+                android:backgroundTint="@color/colorOnPrimary"
+                app:layout_constraintRight_toLeftOf="@+id/guideline"
+                app:layout_constraintLeft_toLeftOf="@+id/viewDivider2"
+                app:layout_constraintTop_toBottomOf="@+id/viewDivider2"
+                />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:text="@string/episode"
+                android:textColor="@color/white"
+                android:fontFamily="@font/ubuntu_medium"
+                android:includeFontPadding="false"
+                android:visibility="invisible"
+                android:backgroundTint="@color/colorThemeExtra"
+                app:layout_constraintLeft_toRightOf="@+id/guideline"
+                app:layout_constraintRight_toRightOf="@+id/viewDivider2"
+                app:layout_constraintTop_toBottomOf="@+id/viewDivider2"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
