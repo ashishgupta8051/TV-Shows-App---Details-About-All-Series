@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TV Shows App - Details About All Series/app/src/main/res/drawable/background.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TV Shows App - Details About All Series/app/src/main/res/drawable/backgroundtvshow.xml" value="0.1841025641025641" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TV Shows App - Details About All Series/app/src/main/res/drawable/ic_baseline_runtime_24.xml" value="0.178125" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TV Shows App - Details About All Series/app/src/main/res/drawable/image_selector_active.xml" value="0.18697916666666667" />
@@ -13,9 +14,10 @@
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TV Shows App - Details About All Series/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TV Shows App - Details About All Series/app/src/main/res/layout/activity_main2.xml" value="0.17083333333333334" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TV Shows App - Details About All Series/app/src/main/res/layout/activity_tvshow_details.xml" value="0.25" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TV Shows App - Details About All Series/app/src/main/res/layout/activity_watch_list.xml" value="0.33" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TV Shows App - Details About All Series/app/src/main/res/layout/episode_list.xml" value="0.17083333333333334" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TV Shows App - Details About All Series/app/src/main/res/layout/image_slider_list.xml" value="0.17083333333333334" />
-        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TV Shows App - Details About All Series/app/src/main/res/layout/tv_show_list.xml" value="0.17083333333333334" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TV Shows App - Details About All Series/app/src/main/res/layout/tv_show_list.xml" value="0.33" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TV Shows App - Details About All Series/app/src/main/res/menu/menuitem.xml" value="0.17083333333333334" />
       </map>
     </option>

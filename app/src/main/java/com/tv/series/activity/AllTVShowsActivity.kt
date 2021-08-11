@@ -3,6 +3,7 @@ package com.tv.series.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -19,7 +20,6 @@ import com.tv.series.utils.ClickListener
 import com.tv.series.viewmodel.TVShowViewModel
 
 class AllTVShowsActivity : AppCompatActivity(),ClickListener {
-
     private lateinit var tvShowViewModel: TVShowViewModel
     private lateinit var tvShowAdapter: TVShowAdapter
     private lateinit var progressBar: ProgressBar
@@ -38,6 +38,11 @@ class AllTVShowsActivity : AppCompatActivity(),ClickListener {
 
         //initialize TVShowViewModel
         tvShowViewModel = ViewModelProvider(this).get(TVShowViewModel::class.java)
+
+       /* tvShowViewModel = ViewModelProvider(this,ViewModelProvider
+            .AndroidViewModelFactory
+            .getInstance(application))
+            .get(TVShowViewModel::class.java)*/
 
         //Binding data
         progressBar = findViewById(R.id.allTvShowLoader)
@@ -66,6 +71,12 @@ class AllTVShowsActivity : AppCompatActivity(),ClickListener {
         loadPopularTvShow()
     }
 
+    override fun onResume() {
+        super.onResume()
+        //get list of all tv series
+        loadPopularTvShow()
+    }
+
     override fun onBackPressed() {
         finishAffinity()
     }
@@ -79,14 +90,14 @@ class AllTVShowsActivity : AppCompatActivity(),ClickListener {
         if (item.itemId == R.id.action_search){
             
         }else if (item.itemId == R.id.action_eye){
-            Toast.makeText(this,"Eye",Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this,WatchListActivity::class.java))
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onClickedTvShow(tvShow: TVShow) {
         val intent = Intent(this,TVShowDetailsActivity::class.java)
-        intent.putExtra("id",tvShow.id)
+        intent.putExtra("tvShow",tvShow)
         startActivity(intent)
     }
 
@@ -95,7 +106,7 @@ class AllTVShowsActivity : AppCompatActivity(),ClickListener {
                 response ->
             progressBar.visibility = View.GONE
             totalPages = response.pages
-            val oldCount = tvShowList.size
+            var oldCount = tvShowList.size
             tvShowList.addAll(response.tv_shows)
             tvShowAdapter.notifyItemRangeInserted(oldCount,tvShowList.size)
         })

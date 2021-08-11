@@ -25,7 +25,6 @@ class EpisodeDetails : AppCompatActivity() {
     private lateinit var image:String
     private lateinit var progressBar: ProgressBar
 
-
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +51,16 @@ class EpisodeDetails : AppCompatActivity() {
         recyclerView.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
 
+        loadEpisodeDetails()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadEpisodeDetails()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun loadEpisodeDetails() {
         tvShowDetailsViewModel.getTvShowDetails(id).observe(this){
                 response ->
             progressBar.visibility = View.GONE

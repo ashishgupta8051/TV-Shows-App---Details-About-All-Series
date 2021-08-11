@@ -1,22 +1,20 @@
 package com.tv.series.repository
 
 import android.content.ContentValues.TAG
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tv.series.network.ApiClient
 import com.tv.series.response.TVShowResponse
-import com.tv.series.utils.DataApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
 class TVShowRepository {
+
     val tvShowList:MutableLiveData<TVShowResponse> = MutableLiveData()
 
+    //get popular tv show
     fun getPopularTvShows(page:Int): MutableLiveData<TVShowResponse>{
         val call: Call<TVShowResponse> = ApiClient.getApi.getTvShows(page)
         call.enqueue(object: Callback<TVShowResponse>{
@@ -30,4 +28,5 @@ class TVShowRepository {
         })
         return tvShowList
     }
+
 }

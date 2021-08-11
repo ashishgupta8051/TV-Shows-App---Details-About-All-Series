@@ -1,6 +1,7 @@
 package com.tv.series.activity
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -17,18 +18,22 @@ import androidx.viewpager2.widget.ViewPager2
 import com.squareup.picasso.Picasso
 import com.tv.series.R
 import com.tv.series.adapter.ImageSliderAdapter
+import com.tv.series.model.TVShow
 import com.tv.series.response.TVShowDetailsResponse
 import com.tv.series.viewmodel.TVShowDetailsViewModel
+import com.tv.series.viewmodel.WatchListViewModel
 import java.util.*
 
 class TVShowDetailsActivity : AppCompatActivity() {
-    private lateinit var id:String
+    private lateinit var tvShow:TVShow
     private lateinit var tvShowDetailsViewModel:TVShowDetailsViewModel
+    private lateinit var watchListViewModel:WatchListViewModel
     private lateinit var tvShowDetailsProgressBar: ProgressBar
     private lateinit var viewPager: ViewPager2
     private lateinit var imageSliderAdapter: ImageSliderAdapter
     private lateinit var linearLayout: LinearLayout
     private lateinit var imageTvShow:ImageView
+    private lateinit var addFevShow:ImageView
     private lateinit var tvShowName: TextView
     private lateinit var tvShowNetwork: TextView
     private lateinit var tvShowStarted: TextView
@@ -43,11 +48,15 @@ class TVShowDetailsActivity : AppCompatActivity() {
     private lateinit var tvShowRuntime: TextView
     private lateinit var downloadBtn: Button
     private lateinit var episodeBtn: Button
-
+    private var check:Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tvshow_details)
+
+        //Initialize TvShowDetailsViewModel
+        tvShowDetailsViewModel = ViewModelProvider(this).get(TVShowDetailsViewModel::class.java)
+        watchListViewModel = ViewModelProvider(this).get(WatchListViewModel::class.java)
 
         supportActionBar!!.title = "Show Details"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true);
@@ -58,7 +67,7 @@ class TVShowDetailsActivity : AppCompatActivity() {
         val extras = intent.extras
 
         if (extras != null){
-            id = extras.getInt("id").toString()
+            tvShow = extras.getSerializable("tvShow") as TVShow
         }else{
             Log.i("Error Message","Value is empty")
         }
@@ -82,9 +91,7 @@ class TVShowDetailsActivity : AppCompatActivity() {
         tvShowRuntime = findViewById(R.id.tvShowRuntime)
         downloadBtn = findViewById(R.id.button1)
         episodeBtn = findViewById(R.id.button2)
-
-        //Initialize TvShowDetailsViewModel
-        tvShowDetailsViewModel = ViewModelProvider(this).get(TVShowDetailsViewModel::class.java)
+        addFevShow = findViewById(R.id.addFevShow)
 
         //Get details about tv series
         getDetailsOfMovie()
@@ -98,12 +105,28 @@ class TVShowDetailsActivity : AppCompatActivity() {
     }
 
     private fun getDetailsOfMovie() {
-        tvShowDetailsViewModel.getTvShowDetails(id).observe(this,{
+        tvShowDetailsViewModel.getTvShowDetails(tvShow.id.toString()).observe(this,{
             response ->
             tvShowDetailsProgressBar.visibility = View.GONE
             loadViewPagerImages(response.tvShow.pictures)
             loadBasicDetails(response)
+            checkWatchListById()
         })
+    }
+
+    private fun checkWatchListById() {
+        watchListViewModel.getWatchListById(tvShow.id.toString()).observe(this){
+            for (item in it){
+                if (item.id == tvShow.id){
+                    check = true
+                    addFevShow.setImageResource(R.drawable.ic_round_check_24)
+                }else{
+                    check = false
+                    addFevShow.setImageResource(R.drawable.ic_baseline_remove_red_eye_24)
+                }
+            }
+
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -135,9 +158,23 @@ class TVShowDetailsActivity : AppCompatActivity() {
 
         episodeBtn.setOnClickListener {
             val intent = Intent(this,EpisodeDetails::class.java)
-            intent.putExtra("id",id)
+            intent.putExtra("id",tvShow.id.toString())
             intent.putExtra("image",response.tvShow.image_thumbnail_path)
             startActivity(intent)
+        }
+
+        addFevShow.setOnClickListener {
+            if (check){
+                addFevShow.setImageResource(R.drawable.ic_baseline_remove_red_eye_24)
+                watchListViewModel.removeFromWatchList(tvShow)
+                Toast.makeText(this,"Remove From WatchList",Toast.LENGTH_SHORT).show()
+                check = false
+            }else{
+                addFevShow.setImageResource(R.drawable.ic_round_check_24)
+                watchListViewModel.addToWatchList(tvShow)
+                Toast.makeText(this,"Added to WatchList",Toast.LENGTH_SHORT).show()
+                check = true
+            }
         }
     }
 

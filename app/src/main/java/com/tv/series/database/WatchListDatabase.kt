@@ -7,20 +7,19 @@ import androidx.room.RoomDatabase
 import com.tv.series.model.TVShow
 
 @Database(entities = [TVShow::class], version = 1, exportSchema = false)
-abstract class WatchListDatabase :RoomDatabase(){
+abstract class WatchListDatabase : RoomDatabase(){
 
     abstract fun getDao(): WatchListDao
 
     companion object{
         private var INSTANCE : WatchListDatabase? = null
-        val DATABASE = "noteDb"
 
         fun getInstance(context: Context) : WatchListDatabase{
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     WatchListDatabase::class.java,
-                    DATABASE
+                    "watchlistDatabase"
                 ).build()
                 INSTANCE = instance
                 instance
