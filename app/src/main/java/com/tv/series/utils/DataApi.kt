@@ -18,5 +18,11 @@ interface DataApi {
         @Query("q") showName:String,
     ): Call<TVShowDetailsResponse>
 
+    @GET("search")
+    fun getSearchResult(
+        @Query("q") searchQuery: String,
+        @Query("page")pageNumber:Int
+    ):Call<TVShowResponse>
+
 
 }

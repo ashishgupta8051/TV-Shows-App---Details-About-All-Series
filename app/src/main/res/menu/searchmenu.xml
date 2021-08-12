@@ -2,17 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/action_eye"
-        android:icon="@drawable/ic_baseline_remove_red_eye_24"
-        android:title="@string/search_movie"
-        app:showAsAction="ifRoom"
-        />
 
     <item
-        android:id="@+id/action_search"
+        android:id="@+id/search"
         android:icon="@drawable/ic_baseline_search_24"
         android:title="@string/search_movie"
         app:showAsAction="ifRoom"
+        app:actionViewClass="android.widget.SearchView"
         />
+
 </menu>

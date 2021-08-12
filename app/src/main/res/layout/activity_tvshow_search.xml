@@ -5,41 +5,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
-    tools:context="com.tv.series.activity.AllTVShowsActivity">
+    tools:context=".activity.TVShowSearchActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tvShowRecyclerView"
+        android:id="@+id/tvShowSearchRecycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="@dimen/_1sdp"
-        android:paddingLeft="@dimen/_1sdp"
-        android:paddingRight="@dimen/_1sdp"
-        android:paddingBottom="@dimen/_45sdp"
+        android:layout_height="0dp"
+        android:padding="@dimen/_1sdp"
         android:clipToPadding="false"
         android:orientation="vertical"
         android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ProgressBar
-        android:id="@+id/allTvShowLoader"
-        android:layout_width="@dimen/_28sdp"
-        android:layout_height="@dimen/_28sdp"
-        android:indeterminateTint="@color/colorOnPrimary"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
-
-    <ProgressBar
-        android:id="@+id/scrollProgressBar"
+        android:id="@+id/searchProgressBar"
         android:layout_width="@dimen/_26sdp"
         android:layout_height="@dimen/_26sdp"
         android:indeterminateTint="@color/colorOnPrimary"
-        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 

@@ -1,9 +1,9 @@
 package com.tv.series.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -23,6 +23,7 @@ class AllTVShowsActivity : AppCompatActivity(),ClickListener {
     private lateinit var tvShowViewModel: TVShowViewModel
     private lateinit var tvShowAdapter: TVShowAdapter
     private lateinit var progressBar: ProgressBar
+    private lateinit var scrollProgress: ProgressBar
     private lateinit var recyclerView: RecyclerView
     private lateinit var linearLayoutManager: LinearLayoutManager
     private var currentPage = 1
@@ -36,45 +37,8 @@ class AllTVShowsActivity : AppCompatActivity(),ClickListener {
         //action bar title name
         supportActionBar!!.title = "TV Shows | Most Popular"
 
-        //initialize TVShowViewModel
-        tvShowViewModel = ViewModelProvider(this).get(TVShowViewModel::class.java)
-
-       /* tvShowViewModel = ViewModelProvider(this,ViewModelProvider
-            .AndroidViewModelFactory
-            .getInstance(application))
-            .get(TVShowViewModel::class.java)*/
-
-        //Binding data
-        progressBar = findViewById(R.id.allTvShowLoader)
-        recyclerView = findViewById(R.id.tvShowRecyclerView)
-
-        //set Recycler View
-        linearLayoutManager = LinearLayoutManager(this)
-        recyclerView.layoutManager = linearLayoutManager
-        recyclerView.setHasFixedSize(true)
-        tvShowAdapter = TVShowAdapter(tvShowList,this)
-        recyclerView.adapter = tvShowAdapter
-
-        recyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (!recyclerView.canScrollVertically(1)){
-                    if (currentPage <= totalPages){
-                        currentPage += 1
-                        loadPopularTvShow()
-                    }
-                }
-            }
-        })
-
-        //get list of all tv series
-        loadPopularTvShow()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        //get list of all tv series
-        loadPopularTvShow()
+        //setUpUI
+        setUpUI()
     }
 
     override fun onBackPressed() {
@@ -88,7 +52,7 @@ class AllTVShowsActivity : AppCompatActivity(),ClickListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_search){
-            
+            startActivity(Intent(this,TVShowSearchActivity::class.java))
         }else if (item.itemId == R.id.action_eye){
             startActivity(Intent(this,WatchListActivity::class.java))
         }
@@ -101,14 +65,50 @@ class AllTVShowsActivity : AppCompatActivity(),ClickListener {
         startActivity(intent)
     }
 
+    private fun setUpUI() {
+        progressBar = findViewById(R.id.allTvShowLoader)
+        scrollProgress = findViewById(R.id.scrollProgressBar)
+        recyclerView = findViewById(R.id.tvShowRecyclerView)
+        linearLayoutManager = LinearLayoutManager(this)
+
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = linearLayoutManager
+        tvShowAdapter = TVShowAdapter(tvShowList,this)
+        recyclerView.adapter = tvShowAdapter
+
+        //initialize TVShowViewModel
+        tvShowViewModel = ViewModelProvider(this).get(TVShowViewModel::class.java)
+
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (!recyclerView.canScrollVertically(1)){
+                    if (currentPage <= totalPages){
+                        currentPage += 1
+                        scrollProgress.visibility = View.VISIBLE
+                        loadPopularTvShow()
+                    }
+                }
+            }
+        })
+
+        //get list of all tv series
+        loadPopularTvShow()
+    }
+
     private fun loadPopularTvShow() {
         tvShowViewModel.getTvShow(currentPage).observe(this,{
                 response ->
-            progressBar.visibility = View.GONE
-            totalPages = response.pages
-            var oldCount = tvShowList.size
-            tvShowList.addAll(response.tv_shows)
-            tvShowAdapter.notifyItemRangeInserted(oldCount,tvShowList.size)
+            if (response != null){
+                progressBar.visibility = View.GONE
+                scrollProgress.visibility = View.GONE
+                totalPages = response.pages
+                val count = tvShowList.size
+                tvShowList.addAll(response.tv_shows)
+                tvShowAdapter.notifyItemRangeInserted(count,tvShowList.size)
+            }else{
+                progressBar.visibility = View.GONE
+            }
         })
     }
 

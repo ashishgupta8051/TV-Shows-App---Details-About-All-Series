@@ -1,6 +1,5 @@
 package com.tv.series.repository
 
-import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,23 +9,20 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+class TVShowSearchRepository {
+    val searchList:MutableLiveData<TVShowResponse> = MutableLiveData()
 
-class TVShowRepository {
-    val tvShowList:MutableLiveData<TVShowResponse> = MutableLiveData()
-
-    //get popular tv show
-    fun getPopularTvShows(page:Int): LiveData<TVShowResponse>{
-        val call: Call<TVShowResponse> = ApiClient.getApiClient().getApi().getTvShows(page)
-        call.enqueue(object: Callback<TVShowResponse>{
+    fun getSearchResult(searchQuery:String,pageNumber: Int):LiveData<TVShowResponse>{
+        val call = ApiClient.getApiClient().getApi().getSearchResult(searchQuery, pageNumber)
+        call.enqueue(object : Callback<TVShowResponse>{
             override fun onResponse(call: Call<TVShowResponse>, response: Response<TVShowResponse>) {
-                tvShowList.postValue(response.body())
+                searchList.postValue(response.body())
             }
 
             override fun onFailure(call: Call<TVShowResponse>, t: Throwable) {
-                Log.e(TAG,t.message.toString())
+                Log.e("TAG","some thing is wrong")
             }
         })
-        return tvShowList
+        return searchList
     }
-
 }

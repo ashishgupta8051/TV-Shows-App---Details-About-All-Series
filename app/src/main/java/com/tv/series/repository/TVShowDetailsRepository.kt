@@ -1,7 +1,6 @@
 package com.tv.series.repository
 
 import androidx.lifecycle.MutableLiveData
-import com.tv.series.database.WatchListDao
 import com.tv.series.network.ApiClient
 import com.tv.series.response.TVShowDetailsResponse
 import retrofit2.Call
@@ -13,7 +12,7 @@ class TVShowDetailsRepository {
     //get Tv show details
     val tvShowDetails: MutableLiveData<TVShowDetailsResponse> = MutableLiveData()
     fun getTvShowDetails(showName: String): MutableLiveData<TVShowDetailsResponse> {
-        val call: Call<TVShowDetailsResponse> = ApiClient.getApi.getTvShowsDetails(showName)
+        val call: Call<TVShowDetailsResponse> = ApiClient.getApiClient().getApi().getTvShowsDetails(showName)
         call.enqueue(object: Callback<TVShowDetailsResponse> {
             override fun onResponse(call: Call<TVShowDetailsResponse>, response: Response<TVShowDetailsResponse>) {
                 tvShowDetails.postValue(response.body())

@@ -30,7 +30,7 @@ class EpisodeAdapter(private val image: String, private var episodeList:List<Epi
     override fun onBindViewHolder(holder: EpisodeHolder, position: Int) {
         val episode = episodeList[position]
 
-        holder.episodeNumber.text = "SE${episode.season} EP${episode.episode}"
+        holder.episodeNumber.text = "SE-${episode.season} EP-${episode.episode}"
         holder.episodeName.text = episode.name
         holder.episodeAirDate.text = "Air Date : ${episode.air_date}"
 

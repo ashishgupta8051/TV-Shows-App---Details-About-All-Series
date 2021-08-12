@@ -12,7 +12,7 @@ import com.tv.series.R
 import com.tv.series.model.TVShow
 import com.tv.series.utils.ClickListener
 
-class TVShowAdapter(private val tvShowList: List<TVShow>,private val listener:ClickListener) : RecyclerView.Adapter<TVShowAdapter.TVShowViewHolder>() {
+class TVShowAdapter(private val tvShowList : ArrayList<TVShow>,private val listener:ClickListener) : RecyclerView.Adapter<TVShowAdapter.TVShowViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TVShowViewHolder {
         val viewHolder = TVShowViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.tv_show_list,parent,false))
