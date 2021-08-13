@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    tools:context="com.tv.series.activity.AllTVShowsActivity">
+    tools:context="com.tv.series.activity.TVShowsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tvShowRecyclerView"

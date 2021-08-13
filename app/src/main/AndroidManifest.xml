@@ -25,7 +25,7 @@
             android:exported="true" />
         <activity android:name=".activity.TVShowDetailsActivity" />
         <activity
-            android:name=".activity.AllTVShowsActivity"
+            android:name=".activity.TVShowsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

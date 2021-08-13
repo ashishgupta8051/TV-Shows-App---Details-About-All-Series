@@ -1,6 +1,5 @@
 package com.tv.series.activity
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,7 +7,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
-import android.widget.Toast
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +17,7 @@ import com.tv.series.model.TVShow
 import com.tv.series.utils.ClickListener
 import com.tv.series.viewmodel.TVShowViewModel
 
-class AllTVShowsActivity : AppCompatActivity(),ClickListener {
+class TVShowsActivity : AppCompatActivity(),ClickListener {
     private lateinit var tvShowViewModel: TVShowViewModel
     private lateinit var tvShowAdapter: TVShowAdapter
     private lateinit var progressBar: ProgressBar
@@ -32,7 +30,7 @@ class AllTVShowsActivity : AppCompatActivity(),ClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_all_tv_shows)
+        setContentView(R.layout.activity_tv_shows)
 
         //action bar title name
         supportActionBar!!.title = "TV Shows | Most Popular"

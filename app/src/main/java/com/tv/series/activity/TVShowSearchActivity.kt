@@ -5,13 +5,15 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ProgressBar
-import android.widget.SearchView
-import android.widget.Toast
+import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,82 +23,32 @@ import com.tv.series.model.TVShow
 import com.tv.series.utils.ClickListener
 import com.tv.series.viewmodel.TVShowSearchViewModel
 import com.tv.series.viewmodel.TVShowViewModel
+import java.util.*
 import kotlin.collections.ArrayList
 
 class TVShowSearchActivity : AppCompatActivity(),ClickListener {
     private lateinit var recyclerView:RecyclerView
     private lateinit var progressBar: ProgressBar
+    private lateinit var searchBackImage: ImageView
+    private lateinit var searchIcon: ImageView
+    private lateinit var searchEditBox: EditText
     private var searchList:ArrayList<TVShow> = arrayListOf()
     private lateinit var allTVShowAdapter:TVShowAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var tvShowSearchViewModel: TVShowSearchViewModel
     private var currentPage = 1
     private var totalPages = 1
+    private val timer:Timer = Timer()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tvshow_search)
 
-        supportActionBar!!.title = "Search"
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowHomeEnabled(true)
+        supportActionBar!!.hide()
 
         setUpUI()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.searchmenu,menu)
-        val item = menu!!.findItem(R.id.search)
-        val searchView = item.actionView as SearchView
-        searchView.queryHint = "Search Here ...."
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String): Boolean {
-                progressBar.visibility = View.VISIBLE
-                getTvShowSearchResult(query)
-
-                recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                        super.onScrolled(recyclerView, dx, dy)
-                        if (!recyclerView.canScrollVertically(1)){
-                            if (currentPage <= totalPages){
-                                currentPage += 1
-                                getTvShowSearchResult(query)
-                                Toast.makeText(this@TVShowSearchActivity,"Hi2",Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
-                })
-                return true
-            }
-
-            override fun onQueryTextChange(query: String): Boolean {
-                progressBar.visibility = View.VISIBLE
-                getTvShowSearchResult(query)
-
-                recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                        super.onScrolled(recyclerView, dx, dy)
-                        if (!recyclerView.canScrollVertically(1)){
-                            if (currentPage <= totalPages){
-                                currentPage += 1
-                                getTvShowSearchResult(query)
-                                Toast.makeText(this@TVShowSearchActivity,"Hi",Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
-                })
-                return true
-            }
-        })
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home){
-            finish()
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
     override fun onClickedTvShow(tvShow: TVShow) {
         val intent = Intent(this,TVShowDetailsActivity::class.java)
@@ -104,9 +56,11 @@ class TVShowSearchActivity : AppCompatActivity(),ClickListener {
         startActivity(intent)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun setUpUI() {
         tvShowSearchViewModel = ViewModelProvider(this).get(TVShowSearchViewModel::class.java)
+        searchBackImage = findViewById(R.id.searchBackButton)
+        searchIcon = findViewById(R.id.searchIcon)
+        searchEditBox = findViewById(R.id.searchQueryEditBox)
         progressBar = findViewById(R.id.searchProgressBar)
         recyclerView = findViewById(R.id.tvShowSearchRecycler)
         recyclerView.setHasFixedSize(true)
@@ -114,9 +68,54 @@ class TVShowSearchActivity : AppCompatActivity(),ClickListener {
         recyclerView.layoutManager = linearLayoutManager
         allTVShowAdapter = TVShowAdapter(searchList,this)
         recyclerView.adapter = allTVShowAdapter
+
+        searchEditBox.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            @SuppressLint("NotifyDataSetChanged")
+            override fun afterTextChanged(s: Editable?) {
+                if (searchEditBox.text.toString().isNotEmpty()){
+                    timer.schedule(object : TimerTask() {
+                        override fun run() {
+                            Handler(Looper.getMainLooper()).post {
+                                currentPage = 1
+                                totalPages = 1
+                                getTvShowSearchResult(searchEditBox.text.toString())
+                            }
+                        }
+                    },800)
+                }else{
+                    searchList.clear()
+                    allTVShowAdapter.notifyDataSetChanged()
+                }
+            }
+        })
+
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (!recyclerView.canScrollVertically(1)){
+                    if (currentPage <= totalPages){
+                        currentPage += 1
+                        getTvShowSearchResult(searchEditBox.text.toString())
+                    }
+                }
+            }
+        })
+
+        searchEditBox.requestFocus()
+
+        searchBackImage.setOnClickListener {
+            onBackPressed()
+        }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun getTvShowSearchResult(searchQuery:String) {
         tvShowSearchViewModel.getSearchResult(searchQuery,currentPage).observe(this){
             response ->
