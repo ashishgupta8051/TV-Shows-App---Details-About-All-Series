@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.tv.series">
+    package="com.tvshow.series">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -15,17 +16,20 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
-            android:name=".activity.TVShowSearchActivity"
+            android:name="com.tvshow.series.activity.TVShowDownloadActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.WatchListActivity"
+            android:name="com.tvshow.series.activity.TVShowSearchActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.EpisodeDetails"
+            android:name="com.tvshow.series.activity.WatchListActivity"
             android:exported="true" />
-        <activity android:name=".activity.TVShowDetailsActivity" />
         <activity
-            android:name=".activity.TVShowsActivity"
+            android:name="com.tvshow.series.activity.EpisodeDetails"
+            android:exported="true" />
+        <activity android:name="com.tvshow.series.activity.TVShowDetailsActivity" />
+        <activity
+            android:name="com.tvshow.series.activity.TVShowsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

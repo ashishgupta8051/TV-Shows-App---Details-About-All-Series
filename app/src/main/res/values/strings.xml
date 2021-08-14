@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TV Shows App - Details About All Series</string>
+    <string name="app_name">TV Shows App - Download &amp; Details About All Series</string>
 
     <string name="tv_shows_most_popular">TV Shows | Most Popular</string>
     <string name="search_movie">Search movie…</string>
@@ -8,4 +8,9 @@
     <string name="download">Download</string>
     <string name="search_tvshow">Search TVShow ....</string>
     <string name="search_here">Search Here ....</string>
+
+    //Internet Alert Dialog
+    <string name="offline_text_2">You are Offline please check your internet connection.</string>
+    <string name="offline_text_1">OOPS !!!</string>
+    <string name="try_again_btn">Try Again</string>
 </resources>
