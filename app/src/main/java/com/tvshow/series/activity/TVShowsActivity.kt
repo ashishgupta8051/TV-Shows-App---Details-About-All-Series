@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.Toast
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,6 +47,36 @@ class TVShowsActivity : AppCompatActivity(),ClickListener {
 
     override fun onBackPressed() {
         finishAffinity()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Toast.makeText(this,"s",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Toast.makeText(this,"re",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //get list of all tv series
+        loadPopularTvShow()
+        Toast.makeText(this,"r",Toast.LENGTH_SHORT).show()
+        var intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(broadcastReceiver, intentFilter)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Toast.makeText(this,"p",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(broadcastReceiver)
+        Toast.makeText(this,"s",Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -114,17 +145,5 @@ class TVShowsActivity : AppCompatActivity(),ClickListener {
         })
     }
 
-    override fun onStart() {
-        super.onStart()
-        //get list of all tv series
-        loadPopularTvShow()
-        var intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-        registerReceiver(broadcastReceiver, intentFilter)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        unregisterReceiver(broadcastReceiver)
-    }
 
 }
