@@ -49,15 +49,7 @@ class TVShowsActivity : AppCompatActivity(),ClickListener {
         finishAffinity()
     }
 
-    override fun onStart() {
-        super.onStart()
-        Toast.makeText(this,"s",Toast.LENGTH_SHORT).show()
-    }
 
-    override fun onRestart() {
-        super.onRestart()
-        Toast.makeText(this,"re",Toast.LENGTH_SHORT).show()
-    }
 
     override fun onResume() {
         super.onResume()
@@ -67,11 +59,7 @@ class TVShowsActivity : AppCompatActivity(),ClickListener {
         var intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         registerReceiver(broadcastReceiver, intentFilter)
     }
-
-    override fun onPause() {
-        super.onPause()
-        Toast.makeText(this,"p",Toast.LENGTH_SHORT).show()
-    }
+    
 
     override fun onStop() {
         super.onStop()
