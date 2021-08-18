@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.tvshow.series.R
 
-class ImageSliderAdapter(private val imageList:List<String>) : RecyclerView.Adapter<ImageSliderAdapter.ImageSliderHolder>() {
+class ImageSliderAdapter : RecyclerView.Adapter<ImageSliderAdapter.ImageSliderHolder>() {
+
+    private var imageList:ArrayList<String> = arrayListOf()
 
     inner class ImageSliderHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val imageView:ImageView = itemView.findViewById(R.id.tvShowPictures)
@@ -22,6 +24,12 @@ class ImageSliderAdapter(private val imageList:List<String>) : RecyclerView.Adap
     override fun onBindViewHolder(holder: ImageSliderHolder, position: Int) {
         val images = imageList[position]
         Picasso.get().load(images).into(holder.imageView)
+    }
+
+    fun getPictures(list:List<String>){
+        imageList.clear()
+        imageList.addAll(list)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {

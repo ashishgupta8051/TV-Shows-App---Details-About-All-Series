@@ -1,5 +1,6 @@
 package com.tvshow.series.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +12,10 @@ import com.tvshow.series.R
 import com.tvshow.series.model.TVShow
 import com.tvshow.series.utils.WatchListListener
 
-class WatchListAdapter(private val watchList:List<TVShow>,private val watchListListener: WatchListListener)
+class WatchListAdapter(private val watchListListener: WatchListListener)
     : RecyclerView.Adapter<WatchListAdapter.WatchListHolder>() {
 
+    private val watchList:ArrayList<TVShow> = arrayListOf()
 
     inner class WatchListHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         var imageView: ImageView = itemView.findViewById(R.id.showImage)
@@ -47,6 +49,13 @@ class WatchListAdapter(private val watchList:List<TVShow>,private val watchListL
         holder.textNetwork.text = tvShow.network
         holder.textStarted.text = "Started on : "+tvShow.start_date
         holder.textStatus.text = "Status : "+tvShow.status
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun getWatchList(list : List<TVShow>){
+        watchList.clear()
+        watchList.addAll(list)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {

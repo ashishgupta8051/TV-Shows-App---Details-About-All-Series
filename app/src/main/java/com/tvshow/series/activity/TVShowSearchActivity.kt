@@ -44,6 +44,17 @@ class TVShowSearchActivity : AppCompatActivity(),ClickListener {
         setUpUI()
     }
 
+    override fun onStart() {
+        super.onStart()
+        var intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(broadcastReceiver, intentFilter)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(broadcastReceiver)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home){
             finish()
@@ -93,17 +104,6 @@ class TVShowSearchActivity : AppCompatActivity(),ClickListener {
             }
         })
 
-    }
-
-    override fun onStart() {
-        super.onStart()
-        var intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-        registerReceiver(broadcastReceiver, intentFilter)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        unregisterReceiver(broadcastReceiver)
     }
 
     private fun setUpUI() {

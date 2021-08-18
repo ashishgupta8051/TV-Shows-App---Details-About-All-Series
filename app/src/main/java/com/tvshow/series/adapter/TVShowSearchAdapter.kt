@@ -12,7 +12,7 @@ import com.tvshow.series.R
 import com.tvshow.series.model.TVShow
 import com.tvshow.series.utils.ClickListener
 
-class TVShowSearchAdapter(private val tvShowSearchList : ArrayList<TVShow>, private val listener: ClickListener):
+class TVShowSearchAdapter(private val tvShowSearchList : List<TVShow>, private val listener: ClickListener):
     RecyclerView.Adapter<TVShowSearchAdapter.TVShowSearchViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TVShowSearchViewHolder {

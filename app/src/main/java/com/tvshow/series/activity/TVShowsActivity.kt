@@ -49,22 +49,16 @@ class TVShowsActivity : AppCompatActivity(),ClickListener {
         finishAffinity()
     }
 
-
-
     override fun onResume() {
         super.onResume()
-        //get list of all tv series
-        loadPopularTvShow()
-        Toast.makeText(this,"r",Toast.LENGTH_SHORT).show()
+
         var intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         registerReceiver(broadcastReceiver, intentFilter)
     }
-    
 
     override fun onStop() {
         super.onStop()
         unregisterReceiver(broadcastReceiver)
-        Toast.makeText(this,"s",Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -115,6 +109,9 @@ class TVShowsActivity : AppCompatActivity(),ClickListener {
             }
         })
 
+        //get list of all tv series
+        loadPopularTvShow()
+
     }
 
     private fun loadPopularTvShow() {
@@ -132,6 +129,4 @@ class TVShowsActivity : AppCompatActivity(),ClickListener {
             }
         })
     }
-
-
 }

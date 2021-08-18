@@ -11,7 +11,9 @@ import com.squareup.picasso.Picasso
 import com.tvshow.series.R
 import com.tvshow.series.model.Episode
 
-class EpisodeAdapter(private val image: String, private var episodeList:List<Episode>) : RecyclerView.Adapter<EpisodeAdapter.EpisodeHolder>() {
+class EpisodeAdapter(private val image: String) : RecyclerView.Adapter<EpisodeAdapter.EpisodeHolder>() {
+
+    private var episodeList:ArrayList<Episode> = arrayListOf()
 
     inner class EpisodeHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val imageTvShowTwo = itemView.findViewById<ImageView>(R.id.tvShowImageTwo)
@@ -34,6 +36,12 @@ class EpisodeAdapter(private val image: String, private var episodeList:List<Epi
         holder.episodeAirDate.text = "Air Date : ${episode.air_date}"
 
         Picasso.get().load(image).into(holder.imageTvShowTwo)
+    }
+
+    fun getEpisode(list:List<Episode>){
+        episodeList.clear()
+        episodeList.addAll(list)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {

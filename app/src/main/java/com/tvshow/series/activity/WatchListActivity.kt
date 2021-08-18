@@ -26,7 +26,6 @@ class WatchListActivity : AppCompatActivity(),WatchListListener {
     private lateinit var progressBar: ProgressBar
     private lateinit var watchListAdapter: WatchListAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private var watchList:ArrayList<TVShow> = arrayListOf()
     private lateinit var broadcastReceiver: BroadcastReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +45,8 @@ class WatchListActivity : AppCompatActivity(),WatchListListener {
         linearLayoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = linearLayoutManager
+        watchListAdapter = WatchListAdapter(this)
+        recyclerView.adapter = watchListAdapter
     }
 
     override fun onStart() {
@@ -77,11 +78,7 @@ class WatchListActivity : AppCompatActivity(),WatchListListener {
     private fun getWatchList() {
         progressBar.visibility = View.GONE
         watchListViewModel.getWatchList().observe(this){
-            watchList.clear()
-            watchList.addAll(it)
-            watchListAdapter = WatchListAdapter(it,this)
-            recyclerView.adapter = watchListAdapter
-            watchListAdapter.notifyDataSetChanged()
+            watchListAdapter.getWatchList(it)
         }
     }
 

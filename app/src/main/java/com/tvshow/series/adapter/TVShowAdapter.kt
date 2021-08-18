@@ -11,7 +11,7 @@ import com.tvshow.series.R
 import com.tvshow.series.model.TVShow
 import com.tvshow.series.utils.ClickListener
 
-class TVShowAdapter(private val tvShowList : ArrayList<TVShow>,private val listener:ClickListener) :
+class TVShowAdapter(private val tvShowList : List<TVShow>,private val listener:ClickListener) :
     RecyclerView.Adapter<TVShowAdapter.TVShowViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TVShowViewHolder {

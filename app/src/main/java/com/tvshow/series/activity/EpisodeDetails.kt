@@ -3,6 +3,7 @@ package com.tvshow.series.activity
 import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
@@ -55,6 +56,8 @@ class EpisodeDetails : AppCompatActivity() {
 
         recyclerView.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
+        episodeAdapter = EpisodeAdapter(image)
+        recyclerView.adapter = episodeAdapter
     }
 
     override fun onStart() {
@@ -75,9 +78,7 @@ class EpisodeDetails : AppCompatActivity() {
                 response ->
             progressBar.visibility = View.GONE
             supportActionBar!!.title = "Episodes || ${response.tvShow.name}"
-            episodeAdapter = EpisodeAdapter(image,response.tvShow.episodes)
-            recyclerView.adapter = episodeAdapter
-            episodeAdapter.notifyDataSetChanged()
+            episodeAdapter.getEpisode(response.tvShow.episodes)
         }
     }
 

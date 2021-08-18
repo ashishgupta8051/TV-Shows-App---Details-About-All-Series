@@ -59,14 +59,36 @@ class TVShowDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tvshow_details)
 
-        //Initialize TvShowDetailsViewModel
-        tvShowDetailsViewModel = ViewModelProvider(this).get(TVShowDetailsViewModel::class.java)
-        watchListViewModel = ViewModelProvider(this).get(WatchListViewModel::class.java)
-
         supportActionBar!!.title = "Show Details"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true);
         supportActionBar!!.setDisplayShowHomeEnabled(true);
 
+        setUpUI()
+
+        //Get details about tv series
+        getDetailsOfMovie()
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        var intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(broadcastReceiver, intentFilter)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(broadcastReceiver)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home){
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setUpUI() {
         //Get data from intent
         val intent = intent
         val extras = intent.extras
@@ -77,8 +99,13 @@ class TVShowDetailsActivity : AppCompatActivity() {
             Log.i("Error Message","Value is empty")
         }
 
-        //Binding data
+        //Initialize TvShowDetailsViewModel
+        tvShowDetailsViewModel = ViewModelProvider(this).get(TVShowDetailsViewModel::class.java)
+        watchListViewModel = ViewModelProvider(this).get(WatchListViewModel::class.java)
+
         broadcastReceiver = CheckInternetConnection()
+
+        //View Binding
         tvShowDetailsProgressBar = findViewById(R.id.tvShowDetailsLoader)
         viewPager = findViewById(R.id.viewPager)
         linearLayout = findViewById(R.id.indicatorLayoutManager)
@@ -98,26 +125,9 @@ class TVShowDetailsActivity : AppCompatActivity() {
         downloadBtn = findViewById(R.id.button1)
         episodeBtn = findViewById(R.id.button2)
         addFevShow = findViewById(R.id.addFevShow)
-    }
 
-    override fun onStart() {
-        super.onStart()
-        //Get details about tv series
-        getDetailsOfMovie()
-        var intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-        registerReceiver(broadcastReceiver, intentFilter)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        unregisterReceiver(broadcastReceiver)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home){
-            finish()
-        }
-        return super.onOptionsItemSelected(item)
+        imageSliderAdapter = ImageSliderAdapter()
+        viewPager.adapter = imageSliderAdapter
     }
 
     private fun getDetailsOfMovie() {
@@ -206,8 +216,7 @@ class TVShowDetailsActivity : AppCompatActivity() {
 
     private fun loadViewPagerImages(pictures: List<String>) {
         viewPager.offscreenPageLimit = 1
-        imageSliderAdapter = ImageSliderAdapter(pictures)
-        viewPager.adapter = imageSliderAdapter
+        imageSliderAdapter.getPictures(pictures)
         setupSliderIndicator(pictures.size)
         viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -221,8 +230,7 @@ class TVShowDetailsActivity : AppCompatActivity() {
         val indicator = arrayOfNulls<ImageView>(size)
         val params = LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
+            ViewGroup.LayoutParams.WRAP_CONTENT)
         params.setMargins(8, 0, 8, 0)
         for (i in indicator.indices) {
             indicator[i] = ImageView(applicationContext)
