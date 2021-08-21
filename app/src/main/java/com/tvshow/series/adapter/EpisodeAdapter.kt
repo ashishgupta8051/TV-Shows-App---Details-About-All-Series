@@ -38,6 +38,7 @@ class EpisodeAdapter(private val image: String) : RecyclerView.Adapter<EpisodeAd
         Picasso.get().load(image).into(holder.imageTvShowTwo)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun getEpisode(list:List<Episode>){
         episodeList.clear()
         episodeList.addAll(list)

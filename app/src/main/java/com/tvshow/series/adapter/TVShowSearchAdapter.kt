@@ -12,8 +12,9 @@ import com.tvshow.series.R
 import com.tvshow.series.model.TVShow
 import com.tvshow.series.utils.ClickListener
 
-class TVShowSearchAdapter(private val tvShowSearchList : List<TVShow>, private val listener: ClickListener):
+class TVShowSearchAdapter(private val listener: ClickListener):
     RecyclerView.Adapter<TVShowSearchAdapter.TVShowSearchViewHolder>() {
+    private val tvShowSearchList : ArrayList<TVShow> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TVShowSearchViewHolder {
         val viewHolder = TVShowSearchViewHolder(
@@ -34,6 +35,13 @@ class TVShowSearchAdapter(private val tvShowSearchList : List<TVShow>, private v
         holder.textNetwork.text = tvShow.network
         holder.textStarted.text = "Started on : " + tvShow.start_date
         holder.textStatus.text = "Status : " + tvShow.status
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun getSearchList(list:List<TVShow>){
+        tvShowSearchList.clear();
+        tvShowSearchList.addAll(list)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {

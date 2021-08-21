@@ -10,7 +10,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
-import android.widget.Toast
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -90,7 +89,7 @@ class TVShowsActivity : AppCompatActivity(),ClickListener {
 
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = linearLayoutManager
-        tvShowAdapter = TVShowAdapter(tvShowList,this)
+        tvShowAdapter = TVShowAdapter(this)
         recyclerView.adapter = tvShowAdapter
 
         //initialize TVShowViewModel
@@ -123,6 +122,8 @@ class TVShowsActivity : AppCompatActivity(),ClickListener {
                 totalPages = response.pages
                 val count = tvShowList.size
                 tvShowList.addAll(response.tv_shows)
+                tvShowAdapter.getTvShowDetails(response.tv_shows)
+                tvShowAdapter.getTvShowDetails(tvShowList)
                 tvShowAdapter.notifyItemRangeInserted(count,tvShowList.size)
             }else{
                 progressBar.visibility = View.GONE

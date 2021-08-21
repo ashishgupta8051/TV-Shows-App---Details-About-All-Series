@@ -11,8 +11,9 @@ import com.tvshow.series.R
 import com.tvshow.series.model.TVShow
 import com.tvshow.series.utils.ClickListener
 
-class TVShowAdapter(private val tvShowList : List<TVShow>,private val listener:ClickListener) :
+class TVShowAdapter(private val listener:ClickListener) :
     RecyclerView.Adapter<TVShowAdapter.TVShowViewHolder>() {
+    private val tvShowList : ArrayList<TVShow> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TVShowViewHolder {
         val viewHolder = TVShowViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.tv_show_list,parent,false))
@@ -31,6 +32,13 @@ class TVShowAdapter(private val tvShowList : List<TVShow>,private val listener:C
         holder.textNetwork.text = tvShow.network
         holder.textStarted.text = "Started on : "+tvShow.start_date
         holder.textStatus.text = "Status : "+tvShow.status
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun getTvShowDetails(list:List<TVShow>){
+        tvShowList.clear()
+        tvShowList.addAll(list)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {

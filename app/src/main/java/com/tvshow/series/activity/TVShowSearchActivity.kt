@@ -75,16 +75,20 @@ class TVShowSearchActivity : AppCompatActivity(),ClickListener {
         searchView.queryHint = "Search here !!"
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                if (query.isNotEmpty()){
-                    currentPage = 1
-                    totalPages = 1
-                    getTvShowSearchResult(query)
-                    scrollRecyclerView(query)
-                }
                 return false
             }
 
             override fun onQueryTextChange(query: String): Boolean {
+                if (query.isEmpty()){
+                    searchList.clear()
+                    recyclerView.adapter = null
+                }else{
+                    currentPage = 1
+                    totalPages = 1
+                    getTvShowSearchResult(query)
+                    scrollRecyclerView(query)
+                    recyclerView.adapter = tvShowSearchAdapter
+                }
                 return false
             }
         })
@@ -114,7 +118,7 @@ class TVShowSearchActivity : AppCompatActivity(),ClickListener {
         recyclerView.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayoutManager
-        tvShowSearchAdapter = TVShowSearchAdapter(searchList,this)
+        tvShowSearchAdapter = TVShowSearchAdapter(this)
         recyclerView.adapter = tvShowSearchAdapter
     }
 
@@ -124,10 +128,13 @@ class TVShowSearchActivity : AppCompatActivity(),ClickListener {
         tvShowSearchViewModel.getSearchResult(searchQuery,currentPage).observe(this,{
                 response ->
             if (response != null){
+                searchList.clear()
                 progressBar.visibility = View.GONE
                 totalPages = response.pages
                 val count = searchList.size
                 searchList.addAll(response.tv_shows)
+                tvShowSearchAdapter.getSearchList(response.tv_shows)
+                tvShowSearchAdapter.getSearchList(searchList)
                 tvShowSearchAdapter.notifyItemRangeInserted(count,searchList.size)
             }else{
                 progressBar.visibility = View.GONE
