@@ -27,10 +27,10 @@
         android:layout_width="@dimen/_28sdp"
         android:layout_height="@dimen/_28sdp"
         android:indeterminateTint="@color/colorOnPrimary"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintTop_toTopOf="@+id/tvShowRecyclerView"
+        app:layout_constraintBottom_toBottomOf="@+id/tvShowRecyclerView"
+        app:layout_constraintLeft_toLeftOf="@+id/tvShowRecyclerView"
+        app:layout_constraintRight_toRightOf="@+id/tvShowRecyclerView"/>
 
     <ProgressBar
         android:id="@+id/scrollProgressBar"
@@ -42,5 +42,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

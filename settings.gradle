@@ -6,5 +6,5 @@ dependencyResolutionManagement {
          // Warning: this repository is going to shut down soon
     }
 }
-rootProject.name = "TV Shows App - Download & Details About All Series"
+rootProject.name = "TV Shows App"
 include ':app'

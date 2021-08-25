@@ -30,7 +30,7 @@ class TVShowsActivity : AppCompatActivity(),ClickListener {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private var currentPage = 1
     private var totalPages = 1
-    private var tvShowList:ArrayList<TVShow> = arrayListOf()
+    private lateinit var tvShowList:ArrayList<TVShow>
     private lateinit var broadcastReceiver: BroadcastReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,6 +81,7 @@ class TVShowsActivity : AppCompatActivity(),ClickListener {
     }
 
     private fun setUpUI() {
+        tvShowList =  ArrayList()
         broadcastReceiver = CheckInternetConnection()
         progressBar = findViewById(R.id.allTvShowLoader)
         scrollProgress = findViewById(R.id.scrollProgressBar)

@@ -13,7 +13,7 @@ import com.tvshow.series.utils.ClickListener
 
 class TVShowAdapter(private val listener:ClickListener) :
     RecyclerView.Adapter<TVShowAdapter.TVShowViewHolder>() {
-    private val tvShowList : ArrayList<TVShow> = arrayListOf()
+    private val tvShowList : ArrayList<TVShow> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TVShowViewHolder {
         val viewHolder = TVShowViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.tv_show_list,parent,false))
