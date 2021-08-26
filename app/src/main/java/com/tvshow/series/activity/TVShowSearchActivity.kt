@@ -25,7 +25,7 @@ import kotlin.collections.ArrayList
 class TVShowSearchActivity : AppCompatActivity(),ClickListener {
     private lateinit var recyclerView:RecyclerView
     private lateinit var progressBar: ProgressBar
-    private var searchList:ArrayList<TVShow> = arrayListOf()
+    private lateinit var searchList:MutableList<TVShow>
     private lateinit var tvShowSearchAdapter:TVShowSearchAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var tvShowSearchViewModel: TVShowSearchViewModel
@@ -111,6 +111,7 @@ class TVShowSearchActivity : AppCompatActivity(),ClickListener {
     }
 
     private fun setUpUI() {
+        searchList = mutableListOf()
         broadcastReceiver = CheckInternetConnection()
         tvShowSearchViewModel = ViewModelProvider(this).get(TVShowSearchViewModel::class.java)
         progressBar = findViewById(R.id.searchProgressBar)

@@ -30,7 +30,7 @@ class TVShowsActivity : AppCompatActivity(),ClickListener {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private var currentPage = 1
     private var totalPages = 1
-    private lateinit var tvShowList:ArrayList<TVShow>
+    private lateinit var tvShowList:MutableList<TVShow>
     private lateinit var broadcastReceiver: BroadcastReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,7 +81,7 @@ class TVShowsActivity : AppCompatActivity(),ClickListener {
     }
 
     private fun setUpUI() {
-        tvShowList =  ArrayList()
+        tvShowList = mutableListOf()
         broadcastReceiver = CheckInternetConnection()
         progressBar = findViewById(R.id.allTvShowLoader)
         scrollProgress = findViewById(R.id.scrollProgressBar)
@@ -121,11 +121,11 @@ class TVShowsActivity : AppCompatActivity(),ClickListener {
                 progressBar.visibility = View.GONE
                 scrollProgress.visibility = View.GONE
                 totalPages = response.pages
-                val count = tvShowList.size
+                val count = response.tv_shows.size
                 tvShowList.addAll(response.tv_shows)
                 tvShowAdapter.getTvShowDetails(response.tv_shows)
                 tvShowAdapter.getTvShowDetails(tvShowList)
-                tvShowAdapter.notifyItemRangeInserted(count,tvShowList.size)
+                tvShowAdapter.notifyItemRangeInserted(count,response.tv_shows.size)
             }else{
                 progressBar.visibility = View.GONE
             }
