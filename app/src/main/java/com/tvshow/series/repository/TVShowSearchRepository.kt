@@ -14,7 +14,7 @@ class TVShowSearchRepository {
 
     private val searchList:MutableLiveData<TVShowResponse> = MutableLiveData()
 
-    fun getSearchResult(searchQuery:String,pageNUmber:Int): LiveData<TVShowResponse>{
+    fun getSearchResult(searchQuery:String,pageNUmber:Int): MutableLiveData<TVShowResponse>{
         val call = ApiClient.getApiClient().getApi().getSearchResult(searchQuery,pageNUmber)
         call.enqueue(object : Callback<TVShowResponse>{
             override fun onResponse(call: Call<TVShowResponse>, response: Response<TVShowResponse>) {

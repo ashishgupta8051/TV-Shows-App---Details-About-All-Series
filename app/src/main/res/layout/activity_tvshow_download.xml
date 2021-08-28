@@ -177,6 +177,23 @@
                 app:layout_constraintTop_toBottomOf="@+id/viewDivider2"
                 />
 
+            <Button
+                android:id="@+id/downloadLink11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ubuntu_medium"
+                android:includeFontPadding="false"
+                android:text="Download Link 11"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/colorTextSecondary"
+                app:layout_constraintRight_toLeftOf="@+id/guideline"
+                app:layout_constraintLeft_toLeftOf="@+id/viewDivider2"
+                app:layout_constraintTop_toBottomOf="@+id/viewDivider2"
+                />
+
+
             <TextView
                 android:id="@+id/episode_name"
                 android:layout_width="match_parent"
@@ -193,7 +210,7 @@
                 android:padding="@dimen/_2sdp" />
 
             <Button
-                android:id="@+id/downloadLink11"
+                android:id="@+id/downloadVpnLink1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ubuntu_medium"

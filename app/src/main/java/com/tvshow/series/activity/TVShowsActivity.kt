@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
+import androidx.lifecycle.Observer
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +21,7 @@ import com.tvshow.series.connection.CheckInternetConnection
 import com.tvshow.series.model.TVShow
 import com.tvshow.series.utils.ClickListener
 import com.tvshow.series.viewmodel.TVShowViewModel
+
 
 class TVShowsActivity : AppCompatActivity(),ClickListener {
     private lateinit var tvShowViewModel: TVShowViewModel
@@ -103,7 +105,7 @@ class TVShowsActivity : AppCompatActivity(),ClickListener {
                     if (currentPage <= totalPages){
                         currentPage += 1
                         scrollProgress.visibility = View.VISIBLE
-                        loadPopularTvShow()
+                        //loadPopularTvShow()
                     }
                 }
             }
@@ -111,7 +113,6 @@ class TVShowsActivity : AppCompatActivity(),ClickListener {
 
         //get list of all tv series
         loadPopularTvShow()
-
     }
 
     private fun loadPopularTvShow() {
@@ -121,9 +122,9 @@ class TVShowsActivity : AppCompatActivity(),ClickListener {
                 progressBar.visibility = View.GONE
                 scrollProgress.visibility = View.GONE
                 totalPages = response.pages
+                tvShowAdapter.getTvShowDetails(response.tv_shows)
                 val count = response.tv_shows.size
                 tvShowList.addAll(response.tv_shows)
-                tvShowAdapter.getTvShowDetails(response.tv_shows)
                 tvShowAdapter.getTvShowDetails(tvShowList)
                 tvShowAdapter.notifyItemRangeInserted(count,response.tv_shows.size)
             }else{

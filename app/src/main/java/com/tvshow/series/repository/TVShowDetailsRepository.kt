@@ -12,7 +12,7 @@ class TVShowDetailsRepository {
 
     //get Tv show details
     val tvShowDetails: MutableLiveData<TVShowDetailsResponse> = MutableLiveData()
-    fun getTvShowDetails(showName: String): LiveData<TVShowDetailsResponse> {
+    fun getTvShowDetails(showName: String): MutableLiveData<TVShowDetailsResponse> {
         val call: Call<TVShowDetailsResponse> = ApiClient.getApiClient().getApi().getTvShowsDetails(showName)
         call.enqueue(object: Callback<TVShowDetailsResponse> {
             override fun onResponse(call: Call<TVShowDetailsResponse>, response: Response<TVShowDetailsResponse>) {

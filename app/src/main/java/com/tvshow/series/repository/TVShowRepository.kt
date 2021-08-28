@@ -15,7 +15,7 @@ class TVShowRepository {
     val tvShowList:MutableLiveData<TVShowResponse> = MutableLiveData()
 
     //get popular tv show
-    fun getPopularTvShows(page:Int): LiveData<TVShowResponse>{
+    fun getPopularTvShows(page:Int): MutableLiveData<TVShowResponse>{
         val call: Call<TVShowResponse> = ApiClient.getApiClient().getApi().getTvShows(page)
         call.enqueue(object: Callback<TVShowResponse>{
             override fun onResponse(call: Call<TVShowResponse>, response: Response<TVShowResponse>) {

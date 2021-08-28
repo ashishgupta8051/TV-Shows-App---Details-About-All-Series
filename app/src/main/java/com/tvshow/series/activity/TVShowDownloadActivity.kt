@@ -30,6 +30,7 @@ class TVShowDownloadActivity : AppCompatActivity() {
     private lateinit var btn9:Button
     private lateinit var btn10:Button
     private lateinit var btn11:Button
+    private lateinit var btnVpn1:Button
     private lateinit var broadcastReceiver: BroadcastReceiver
 
     @SuppressLint("SetTextI18n")
@@ -107,11 +108,11 @@ class TVShowDownloadActivity : AppCompatActivity() {
             }
         }
 
-        //https://9xmovies.quest/
+        //https://ev01.to/search/
         btn6.setOnClickListener {
             try {
                 val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = Uri.parse("https://9xmovies.quest/?s=${name}")
+                intent.data = Uri.parse("https://ev01.to/search/$name");
                 startActivity(intent)
             }catch (e: Exception){
                 Toast.makeText(this,"Some thing is wrong.", Toast.LENGTH_SHORT).show()
@@ -162,8 +163,19 @@ class TVShowDownloadActivity : AppCompatActivity() {
             }
         }
 
-        //http://www.todaytvseries1.com/
+        //https://9xmovies.quest/
         btn11.setOnClickListener {
+            try {
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse("https://9xmovies.quest/?s=${name}")
+                startActivity(intent)
+            }catch (e: Exception){
+                Toast.makeText(this,"Some thing is wrong.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        //http://www.todaytvseries1.com/
+        btnVpn1.setOnClickListener {
             try {
                 val intent = Intent(Intent.ACTION_VIEW)
                 intent.data = Uri.parse("http://www.todaytvseries1.com")
@@ -200,6 +212,7 @@ class TVShowDownloadActivity : AppCompatActivity() {
         btn9 = findViewById(R.id.downloadLink9)
         btn10 = findViewById(R.id.downloadLink10)
         btn11 = findViewById(R.id.downloadLink11)
+        btnVpn1 = findViewById(R.id.downloadVpnLink1)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
