@@ -105,7 +105,7 @@ class TVShowsActivity : AppCompatActivity(),ClickListener {
                     if (currentPage <= totalPages){
                         currentPage += 1
                         scrollProgress.visibility = View.VISIBLE
-                        //loadPopularTvShow()
+                        loadPopularTvShow()
                     }
                 }
             }
