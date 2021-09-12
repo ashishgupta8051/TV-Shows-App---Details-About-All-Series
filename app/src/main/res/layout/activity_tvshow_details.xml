@@ -59,7 +59,7 @@
                 android:layout_height="@dimen/_155sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:scaleType="centerCrop"
-                tools:src="@mipmap/appicon"
+                tools:src="@mipmap/app_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/viewPager"
                 app:layout_constraintBottom_toBottomOf="@+id/viewPager"
