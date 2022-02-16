@@ -131,13 +131,12 @@ class TVShowDetailsActivity : AppCompatActivity() {
     }
 
     private fun getDetailsOfMovie() {
-        tvShowDetailsViewModel.getTvShowDetails(tvShow.id.toString()).observe(this,{
-            response ->
+        tvShowDetailsViewModel.getTvShowDetails(tvShow.id.toString()).observe(this) { response ->
             tvShowDetailsProgressBar.visibility = View.GONE
             loadViewPagerImages(response.tvShow.pictures)
             loadBasicDetails(response)
             checkWatchListById()
-        })
+        }
     }
 
     private fun checkWatchListById() {
